@@ -1,5 +1,6 @@
 import React from "react";
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 import FormControl from "@mui/material/FormControl";
 import Input from "@mui/material/Input";
@@ -7,6 +8,12 @@ import InputLabel from "@mui/material/InputLabel";
 import Button from "@mui/material/Button";
 
 const LoginForm = () => {
+  let navigate = useNavigate();
+
+  function redirect() {
+    navigate("../dashboard", { replace: true });
+  }
+
   const username = useRef();
   const password = useRef();
 
@@ -52,6 +59,7 @@ const LoginForm = () => {
         </FormControl>
         <Button type="submit">Login</Button>
       </form>
+      <Button onClick={redirect}>Dashboard</Button>
     </div>
   );
 };

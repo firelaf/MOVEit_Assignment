@@ -1,5 +1,5 @@
-import LoginForm from "./components/LoginForm.js";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { Outlet } from "react-router-dom";
 
 function App() {
   let theme = createTheme({
@@ -16,6 +16,9 @@ function App() {
         light: "#33eb91",
         contrastText: "#000",
       },
+    },
+    typography: {
+      fontFamily: "Helvetica",
     },
     components: {
       MuiInputLabel: {
@@ -53,7 +56,7 @@ function App() {
   return (
     <div className="App">
       <ThemeProvider theme={theme}>
-        <LoginForm />
+        <Outlet />
       </ThemeProvider>
     </div>
   );
