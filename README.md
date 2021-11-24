@@ -10,3 +10,5 @@
 8. Log out if you wish
 
 Footnote - this app assumes that a home folder named the same way as the user's name exists. In my case, my username would be "interview.daniel.sergilov" and the folder will be named "interview.daniel.sergilov". If it does not exist, the upload will fail.
+
+Footnote #2 - this app also assumes that you have an account on mobile-1.moveitcloud.com as that's where the API requests are being sent.
