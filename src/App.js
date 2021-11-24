@@ -1,5 +1,6 @@
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 function App() {
   let theme = createTheme({
@@ -52,6 +53,11 @@ function App() {
       },
     },
   });
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    navigate("/login", { replace: true });
+  }, []);
 
   return (
     <div className="App">

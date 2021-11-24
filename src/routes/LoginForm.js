@@ -2,10 +2,7 @@ import React from "react";
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
-import FormControl from "@mui/material/FormControl";
-import Input from "@mui/material/Input";
-import InputLabel from "@mui/material/InputLabel";
-import Button from "@mui/material/Button";
+import { FormControl, Input, InputLabel, Button } from "@mui/material";
 
 const LoginForm = () => {
   let navigate = useNavigate();
@@ -16,6 +13,23 @@ const LoginForm = () => {
 
   const username = useRef();
   const password = useRef();
+
+  function handleSubmit() {
+    requestToken(username.current.value, password.current.value).then(
+      ([statusCode, data]) => {
+        if (statusCode === 200) {
+          localStorage.setItem("access_token", data.access_token);
+          localStorage.setItem("refresh_token", data.refresh_token);
+          localStorage.setItem("username", username.current.value);
+          console.log(localStorage);
+          navigate("../dashboard", { replace: true });
+        } else
+          console.log(
+            `Status ${statusCode}, ${data.error}, ${data.error_description}`
+          );
+      }
+    );
+  }
 
   async function requestToken(user, pass) {
     const reqBody = `grant_type=password&username=${user}&password=${pass}`;
@@ -33,7 +47,8 @@ const LoginForm = () => {
     console.log(user, pass);
 
     const data = await response.json();
-    return data;
+    console.log(response);
+    return [response.status, data];
   }
 
   return (
@@ -42,11 +57,7 @@ const LoginForm = () => {
         id="login"
         onSubmit={(event) => {
           event.preventDefault();
-          requestToken(username.current.value, password.current.value).then(
-            (data) => {
-              console.log(data);
-            }
-          );
+          handleSubmit();
         }}
       >
         <FormControl color="primary" required={true}>
