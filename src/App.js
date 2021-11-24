@@ -3,6 +3,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
 function App() {
+  //Theming for MUI
   let theme = createTheme({
     palette: {
       primary: {
@@ -22,13 +23,6 @@ function App() {
       fontFamily: "Helvetica",
     },
     components: {
-      MuiInputLabel: {
-        styleOverrides: {
-          root: {
-            fontWeight: "bold",
-          },
-        },
-      },
       MuiButton: {
         styleOverrides: {
           root: {
@@ -40,6 +34,27 @@ function App() {
         styleOverrides: {
           root: {
             fontWeight: "bold",
+            backgroundColor: "#d8e8d8",
+            height: "3em",
+          },
+        },
+      },
+      MuiInputLabel: {
+        styleOverrides: {
+          root: {
+            paddingTop: "0.8em",
+            fontWeight: "bold",
+          },
+        },
+      },
+      MuiAppBar: {
+        styleOverrides: {
+          root: {
+            padding: "0.5em",
+            fontFamily: "Helvetica",
+            fontWeight: "bold",
+            minHeight: "3.3em",
+            justifyContent: "center",
           },
         },
       },
@@ -54,9 +69,11 @@ function App() {
     },
   });
 
+  //Auto redirect to login path
   const navigate = useNavigate();
   useEffect(() => {
     navigate("/login", { replace: true });
+    // eslint-disable-next-line
   }, []);
 
   return (
